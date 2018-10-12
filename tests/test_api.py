@@ -13,6 +13,11 @@ def test_plus_one(client):
     assert result['x'] == 3
 
 
+def test_plus_two(client):
+    result = call(client, '/plus_two', {'x': 2})
+    assert result['x'] == 4
+
+
 def test_square(client):
     result = call(client, '/square', {'x': 2})
     assert result['x'] == 4
