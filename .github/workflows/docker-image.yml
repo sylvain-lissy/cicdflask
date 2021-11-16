@@ -42,7 +42,8 @@ jobs:
         uses: alexanderdamiani/pytester-cov@v1.2.1
         with:
           pytest-root-dir: './app'
-      - name: flake8
+      - 
+        name: flake8
         uses: suo/flake8-github-action@v1
 
 
