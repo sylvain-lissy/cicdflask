@@ -5,7 +5,7 @@ stages:
 variables:
   DOCKER_TLS_CERTDIR: ""
   GIT_STRATEGY: clone
-  REGISTRY_USER: vanessakovalsky
+  REGISTRY_USER: sylvain-lissy
   APPLICATION: demo-python-flask
   LATEST_IMAGE: $REGISTRY_USER/$APPLICATION:latest
   RELEASE_IMAGE: $REGISTRY_USER/$APPLICATION:$CI_BUILD_REF_NAME
