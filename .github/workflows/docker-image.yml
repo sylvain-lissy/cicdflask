@@ -41,7 +41,7 @@ jobs:
         name: pytester-cov
         uses: alexanderdamiani/pytester-cov@v1.2.1
         with:
-          pytest-root-dir: './web'
+          pytest-root-dir: '/app'
         
 
 
