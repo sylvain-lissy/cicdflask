@@ -37,15 +37,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      
-  pytest:
-    runs-on: ubuntu-latest
-    steps:
       -
         name: pytest-cov
         uses: alexanderdamiani/pytester-cov@v1.2.1
         with:
           pytest-root-dir: './app'
-        
+      - name: flake8
+        uses: suo/flake8-github-action@v1
 
 
