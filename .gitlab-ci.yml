@@ -1,6 +1,8 @@
 stages:
   - build
   - test
+  - staticAnalysis
+  - publish
 
 variables:
   DOCKER_TLS_CERTDIR: ""
@@ -36,3 +38,47 @@ test:
     - docker:dind
   script:
     - docker run $DOCKER_IMAGE
+     
+pytest:
+  stage: test
+  image: $LATEST_IMAGE
+  script:
+    - pip3 install pytest pytest-cov
+    - pytest tests --cov --cov-report term --cov-report html
+  artifacts:
+    paths:
+      - htmlcov
+
+flake8:
+  stage: staticAnalysis
+  image: $LATEST_IMAGE
+  script:
+    - pip3 install flake8
+    - flake8 --max-line-length=120 web/*.py
+
+mypy:
+  stage: staticAnalysis
+  image: $LATEST_IMAGE
+  script:
+    - pip3 install mypy
+    - pwd
+    - ls -l
+    - python3 -m mypy web/*.py
+
+pylint:
+  stage: staticAnalysis
+  image: $LATEST_IMAGE
+  allow_failure: true
+  script:
+    - pip3 install pylint
+    - pylint -d C0301 web/*.py
+
+pages:
+  stage: publish
+  script:
+    - mkdir .public
+    - cp -r htmlcov/* .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public
